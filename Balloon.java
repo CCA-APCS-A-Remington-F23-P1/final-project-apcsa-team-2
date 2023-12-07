@@ -11,9 +11,15 @@ public class Balloon extends MovingThing {
     private int speed;
     private Image image;
     private static ArrayList<Balloon> balloons = new ArrayList<Balloon>();
+    private static int defW = 10;
+    private static int defH = 10;
+    private static int defS = 3;
+    private static int defX = 50;
+    private static int defY = 100;
+
 
     public Balloon() {
-        this(10, 10, 10, 10, 3);
+        this(defX, defY, defW, defH, defS);
     }
     public Balloon(int x, int y, int w, int h, int s) {
         super(x, y, w, h);
@@ -45,11 +51,58 @@ public class Balloon extends MovingThing {
         setX(getX() - speed);
     }
 
+    public void move(String dir) {
+        if (dir.equals("UP")) setY(getY() + speed);
+        else if (dir.equals("DOWN")) setY(getY() - speed);
+        else if (dir.equals("RIGHT")) setX(getX() + speed);
+        else if (dir.equals("LEFT")) setX(getX() - speed);
+    }
+
     public static void moveAll() {
         for (Balloon b : balloons) {
             b.move();
         }
     }
+
+    public static void newSet(int ct) {
+        int rand = (int) (Math.random() * 100) + 1;
+
+        if (rand <= 33) allSame(ct,"UP");
+        else if (rand > 33 && rand <= 67) allSame(ct, "DOWN");
+        else alternating(ct);
+    }
+
+
+    public static void allSame(int ct, String where) {
+        int x = 50;
+        int y = 0;
+
+        if (where.equals("UP")) y = 100;
+        else if (where.equals("DOWN")) y = 20;
+
+
+        for (int i = 0; i < ct; i++) {
+            balloons.add(new Balloon(x,y,defW, defH, defS));
+            x += 20;
+        }
+    }
+
+    public static void alternating(int ct) {
+        int a = 0;
+        int x = 50;
+
+        for (int i = 0; i < ct; i++) {
+            if (a == 0) {
+                balloons.add(new Balloon(x, 100, defW, defH, defS));
+                a = 1;
+            }
+            else {
+                balloons.add(new Balloon(x, 20, defW, defH, defS));
+                a = 0;
+            }
+        }
+    }
+    
 
     public static void cleanUp() {
         Balloon b;
