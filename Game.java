@@ -89,8 +89,54 @@ public class Game extends Canvas implements KeyListener, Runnable
     for (Obstacle o : bullets) {
       o.draw();
     }
+    graphToBack.drawString("score : " + score, 25, 25);
+    graphToBack.drawString("lives : " + lives, 25, 50);
 
-    
+    //uncomment when ready
+    // if (keys[0]) {
+    //   char.jump();
+    // }
 
+    // add random obstacle after 1-4 seconds
+    if(System.currentTimeMillis() - lastObstacle > Math.random()*300+100) {
+      obstacle.add(new Obstacle());
+      lastObstacle = System.currentTimeMillis();
+    }
+
+    //things that need to be added:
+    //add balloon after some amount of seconds (use lastBalloon and System.currentTimeMillis())
+    //adding bullets after some amount of seconds (use lastBullet and System.currentTimeMillis())
+    // getting hit and losing a life
+    // getting hit and losing the game
+
+    twoDGraph.drawImage(back,null,0,0);
+  }
+
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+      keys[0] = true;
+    }
+    repaint();
+  }
+
+  public void keyReleased(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.CK_SPACE) {
+      keys[0] = false;
+    }
+    repaint();
+  }
+
+  public void keyTyped(KeyEvent e) {
+    //empty
+  }
+
+  public void run() {
+    try {
+      while(true) {
+        Thread.currentThread().sleep(5);
+      }
+    } catch(Exception e) {
+    }
+  }
   
 }
