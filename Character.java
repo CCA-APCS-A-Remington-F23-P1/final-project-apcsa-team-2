@@ -10,7 +10,24 @@ public class Character
 {
   private Image image;
 
-  public Character() {
-    
+  public Character(String o, int x, int y, int w, int h, int s) { 
+    super(x,y,w,h);
+    try {
+      URL url = getClass().getResource(o+".png");
+    }
+    catch(Exception e) {
+      //empty
+    }
   }
+
+  public void jump() {
+    //make char jump
+  }
+
+  public void draw(Graphics window) {
+    window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
+  }
+
+  public String toString() {
+    return super.toString();
 }
