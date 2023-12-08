@@ -9,6 +9,10 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Game extends Canvas implements KeyListener, Runnable
 {
@@ -16,8 +20,8 @@ public class Game extends Canvas implements KeyListener, Runnable
   
   // private Character char;
   private List<Balloon> balloons;
-  private List<Obstacles> obstacles;
-  private List<Obstacles> bullets;
+  private List<Obstacle> obstacles;
+  private List<Obstacle> bullets;
 
   // pause/end game
   private boolean pause = false;
@@ -40,9 +44,9 @@ public class Game extends Canvas implements KeyListener, Runnable
     keys = new boolean[1];
 
     // char = new Character(charChoice, x, y, w, h);
-    balloons = new List<Balloons>;
-    obstacles = new List<Obstacles>;
-    bullets = new List<Obstacles>;
+    balloons = new List<Balloon>;
+    obstacles = new List<Obstacle>;
+    bullets = new List<Obstacle>;
 
     this.addKeyListener(this);
     new Thread(this).start();
@@ -74,7 +78,7 @@ public class Game extends Canvas implements KeyListener, Runnable
       back = (BufferedImage)(createImage(getWidth(),getHeight()));
     }
     Graphics graphToBack = back.createGraphics();
-    graphToBack.setColor(Color.PURPLE);
+    graphToBack.setColor(Color.BLUE);
     graphToBack.drawString("game title", 25, 50);
     graphToBack.setColor(Color.BLACK);
     graphToBack.fillRect(0,0,800,600);
