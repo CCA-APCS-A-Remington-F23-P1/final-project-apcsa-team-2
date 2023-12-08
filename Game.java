@@ -53,6 +53,7 @@ public class Game extends Canvas implements KeyListener, Runnable
     new Thread(this).start();
 
     setVisible(true); 
+  
     Character charter = new Character();
 
   }
