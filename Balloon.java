@@ -44,7 +44,9 @@ public class Balloon extends MovingThing {
     }
 
     public void draw(Graphics window) {
-        window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
+
+        for (Balloon b : balloons) 
+            window.drawImage(image,getX(),getY(),getWidth(),getHeight(),null);
     }
 
     public void move() {
