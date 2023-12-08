@@ -21,8 +21,21 @@ public class Character
   }
 
   public void jump() {
-    //make char jump
+    ySpeed = -20; // -20 stand for how high
   }
+
+  public void update() {
+    y += ySpeed;
+    
+    ySpeed += 2; // Adjust the value based on the strength of gravity for jump, physics hehe
+
+    // Prevent the character from falling through the floor 
+    if (y > 500 - getHeight()) { // Adjust 500 based on the ground level
+      y = 500 - getHeight();
+      ySpeed = 0; // Character is on the ground, so reset the vertical speed
+    }
+  }
+
 
   public void draw(Graphics window) {
     window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);
@@ -30,4 +43,6 @@ public class Character
 
   public String toString() {
     return super.toString();
+ }
 }
+

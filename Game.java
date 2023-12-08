@@ -93,9 +93,9 @@ public class Game extends Canvas implements KeyListener, Runnable
     graphToBack.drawString("lives : " + lives, 25, 50);
 
     //uncomment when ready
-    // if (keys[0]) {
-    //   char.jump();
-    // }
+     if (keys[0]) {
+       Character.jump();
+     }
 
     // add random obstacle after 1-4 seconds
     if(System.currentTimeMillis() - lastObstacle > Math.random()*300+100) {
