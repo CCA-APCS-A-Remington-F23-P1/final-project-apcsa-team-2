@@ -52,7 +52,9 @@ public class Game extends Canvas implements KeyListener, Runnable
     this.addKeyListener(this);
     new Thread(this).start();
 
-    setVisible(true);  
+    setVisible(true); 
+    Character charter = new Character();
+
   }
 
   public void update(Graphics window)
@@ -97,7 +99,7 @@ public class Game extends Canvas implements KeyListener, Runnable
 
     //uncomment when ready
      if (keys[0]) {
-       Character.jump();
+       charter.jump();
      }
 
     // add random obstacle after 1-4 seconds
