@@ -27,7 +27,7 @@ public class Game extends Canvas implements KeyListener, Runnable
 
   //functionality
   private boolean[] keys;
-  private BufferedImage back;
+  private BufferedImage back = ImageIO.read("/images/Parallax_No_Car.gif");
 
   //timing
   private long lastObstacle; //seconds since the last obstacle was summoned
