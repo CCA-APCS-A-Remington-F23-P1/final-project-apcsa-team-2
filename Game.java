@@ -9,15 +9,19 @@ import static java.lang.Character.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Game extends Canvas implements KeyListener, Runnable
 {
   //uncomment when ready
   
   // private Character char;
-  private List<Balloon> balloons;
-  private List<Obstacles> obstacles;
-  private List<Obstacles> bullets;
+  private BalloonSet balloons;
+  private List<Obstacle> obstacles;
+  private List<Obstacle> bullets;
 
   // pause/end game
   private boolean pause = false;
@@ -27,7 +31,8 @@ public class Game extends Canvas implements KeyListener, Runnable
 
   //functionality
   private boolean[] keys;
-  private BufferedImage back;
+  private File bg = new File("/images/Parallax_No_Car.gif");
+  private BufferedImage back = ImageIO.read(bg);
 
   //timing
   private long lastObstacle; //seconds since the last obstacle was summoned
@@ -40,9 +45,9 @@ public class Game extends Canvas implements KeyListener, Runnable
     keys = new boolean[1];
 
     // char = new Character(charChoice, x, y, w, h);
-    balloons = new List<Balloons>;
-    obstacles = new List<Obstacles>;
-    bullets = new List<Obstacles>;
+    balloons = new BalloonSet();
+    obstacles = new ArrayList<Obstacle>();
+    bullets = new ArrayList<Obstacle>();
 
     this.addKeyListener(this);
     new Thread(this).start();
@@ -74,15 +79,13 @@ public class Game extends Canvas implements KeyListener, Runnable
       back = (BufferedImage)(createImage(getWidth(),getHeight()));
     }
     Graphics graphToBack = back.createGraphics();
-    graphToBack.setColor(Color.PURPLE);
+    graphToBack.setColor(Color.BLUE);
     graphToBack.drawString("game title", 25, 50);
     graphToBack.setColor(Color.BLACK);
     graphToBack.fillRect(0,0,800,600);
 
     // char.draw(graphToBack);
-    for (Balloon b: balloons) {
-      b.draw();
-    }
+    balloons.draw(graphToBack);
     for (Obstacle o : obstacles) {
       o.draw();
     }
@@ -99,7 +102,7 @@ public class Game extends Canvas implements KeyListener, Runnable
 
     // add random obstacle after 1-4 seconds
     if(System.currentTimeMillis() - lastObstacle > Math.random()*300+100) {
-      obstacle.add(new Obstacle());
+      obstacles.add(new Obstacle());
       lastObstacle = System.currentTimeMillis();
     }
 
@@ -120,7 +123,7 @@ public class Game extends Canvas implements KeyListener, Runnable
   }
 
   public void keyReleased(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.CK_SPACE) {
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
       keys[0] = false;
     }
     repaint();
