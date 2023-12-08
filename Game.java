@@ -17,6 +17,7 @@ public class Game extends Canvas implements KeyListener, Runnable
   // private Character char;
   private List<Balloon> balloons;
   private List<Obstacles> obstacles;
+  private List<Obstacles> bullets;
 
   // pause/end game
   private boolean pause = false;
@@ -30,15 +31,112 @@ public class Game extends Canvas implements KeyListener, Runnable
 
   //timing
   private long lastObstacle; //seconds since the last obstacle was summoned
+  private long lastBullet; //seconds since the last bullet was summoned
   private long lastBalloon; //seconds since the last balloon was summoned
 
-  // //constructor
-  // public Game() {
-  //   setBackground(Color.black); // maybe we can change the background in the future?
-  //   keys = new boolean[1];
-  // }
+  //constructor
+  public Game(String charChoice) {
+    setBackground(Color.black); // maybe we can change the background in the future?
+    keys = new boolean[1];
 
-    
+    // char = new Character(charChoice, x, y, w, h);
+    balloons = new List<Balloons>;
+    obstacles = new List<Obstacles>;
+    bullets = new List<Obstacles>;
 
+    this.addKeyListener(this);
+    new Thread(this).start();
+
+    setVisible(true);  
+  }
+
+  public void update(Graphics window)
+  {
+    paint(window);
+  }
+
+  public void paint(Graphics window) {
+    if (end) {
+      return;
+    }
+    if (pause) {
+      if(keys[0]) {
+        pause = false;
+        keys[0] = false;
+      }
+      else {
+        return;
+      }
+    }
+
+    Graphics2D twoDGraph = (Graphics2D)window;
+    if (back==null) {
+      back = (BufferedImage)(createImage(getWidth(),getHeight()));
+    }
+    Graphics graphToBack = back.createGraphics();
+    graphToBack.setColor(Color.PURPLE);
+    graphToBack.drawString("game title", 25, 50);
+    graphToBack.setColor(Color.BLACK);
+    graphToBack.fillRect(0,0,800,600);
+
+    // char.draw(graphToBack);
+    for (Balloon b: balloons) {
+      b.draw();
+    }
+    for (Obstacle o : obstacles) {
+      o.draw();
+    }
+    for (Obstacle o : bullets) {
+      o.draw();
+    }
+    graphToBack.drawString("score : " + score, 25, 25);
+    graphToBack.drawString("lives : " + lives, 25, 50);
+
+    //uncomment when ready
+    // if (keys[0]) {
+    //   char.jump();
+    // }
+
+    // add random obstacle after 1-4 seconds
+    if(System.currentTimeMillis() - lastObstacle > Math.random()*300+100) {
+      obstacle.add(new Obstacle());
+      lastObstacle = System.currentTimeMillis();
+    }
+
+    //things that need to be added:
+    //add balloon after some amount of seconds (use lastBalloon and System.currentTimeMillis())
+    //adding bullets after some amount of seconds (use lastBullet and System.currentTimeMillis())
+    // getting hit and losing a life
+    // getting hit and losing the game
+
+    twoDGraph.drawImage(back,null,0,0);
+  }
+
+  public void keyPressed(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+      keys[0] = true;
+    }
+    repaint();
+  }
+
+  public void keyReleased(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.CK_SPACE) {
+      keys[0] = false;
+    }
+    repaint();
+  }
+
+  public void keyTyped(KeyEvent e) {
+    //empty
+  }
+
+  public void run() {
+    try {
+      while(true) {
+        Thread.currentThread().sleep(5);
+      }
+    } catch(Exception e) {
+    }
+  }
   
 }
