@@ -19,7 +19,7 @@ public class Game extends Canvas implements KeyListener, Runnable
   //uncomment when ready
   
   // private Character char;
-  private List<Balloon> balloons;
+  private BalloonSet balloons;
   private List<Obstacle> obstacles;
   private List<Obstacle> bullets;
 
@@ -31,7 +31,8 @@ public class Game extends Canvas implements KeyListener, Runnable
 
   //functionality
   private boolean[] keys;
-  private BufferedImage back = ImageIO.read("/images/Parallax_No_Car.gif");
+  private File bg = new File("/images/Parallax_No_Car.gif");
+  private BufferedImage back = ImageIO.read(bg);
 
   //timing
   private long lastObstacle; //seconds since the last obstacle was summoned
@@ -44,9 +45,9 @@ public class Game extends Canvas implements KeyListener, Runnable
     keys = new boolean[1];
 
     // char = new Character(charChoice, x, y, w, h);
-    balloons = new List<Balloon>;
-    obstacles = new List<Obstacle>;
-    bullets = new List<Obstacle>;
+    balloons = new BalloonSet();
+    obstacles = new ArrayList<Obstacle>();
+    bullets = new ArrayList<Obstacle>();
 
     this.addKeyListener(this);
     new Thread(this).start();
@@ -84,9 +85,7 @@ public class Game extends Canvas implements KeyListener, Runnable
     graphToBack.fillRect(0,0,800,600);
 
     // char.draw(graphToBack);
-    for (Balloon b: balloons) {
-      b.draw();
-    }
+    balloons.draw(graphToBack);
     for (Obstacle o : obstacles) {
       o.draw();
     }
@@ -103,7 +102,7 @@ public class Game extends Canvas implements KeyListener, Runnable
 
     // add random obstacle after 1-4 seconds
     if(System.currentTimeMillis() - lastObstacle > Math.random()*300+100) {
-      obstacle.add(new Obstacle());
+      obstacles.add(new Obstacle());
       lastObstacle = System.currentTimeMillis();
     }
 
@@ -124,7 +123,7 @@ public class Game extends Canvas implements KeyListener, Runnable
   }
 
   public void keyReleased(KeyEvent e) {
-    if (e.getKeyCode() == KeyEvent.CK_SPACE) {
+    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
       keys[0] = false;
     }
     repaint();
