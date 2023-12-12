@@ -37,7 +37,7 @@ public class Game extends Canvas implements KeyListener, Runnable
   //timing
   private long lastObstacle; //seconds since the last obstacle was summoned
   private long lastBullet; //seconds since the last bullet was summoned
-  private long lastBalloon; //seconds since the last balloon was summoned
+  // private long lastBalloon; //seconds since the last balloon was summoned
 
   //constructor
   public Game(String charChoice) {
@@ -87,7 +87,7 @@ public class Game extends Canvas implements KeyListener, Runnable
     graphToBack.fillRect(0,0,800,600);
 
     // char.draw(graphToBack);
-    balloons.draw(graphToBack);
+    balloons.update();
     for (Obstacle o : obstacles) {
       o.draw();
     }
