@@ -18,7 +18,7 @@ public class Game extends Canvas implements KeyListener, Runnable
 {
   //uncomment when ready
   
-  // private Character char;
+  private Character charter;
   private BalloonSet balloons;
   private ObstacleSet obstacles;
   private ObstacleSet bullets;
@@ -37,7 +37,7 @@ public class Game extends Canvas implements KeyListener, Runnable
   //timing
   private long lastObstacle; //seconds since the last obstacle was summoned
   private long lastBullet; //seconds since the last bullet was summoned
-  // private long lastBalloon; //seconds since the last balloon was summoned
+  private long lastBalloon; //seconds since the last balloon was summoned
 
   //constructor
   public Game(String charChoice) {
@@ -49,12 +49,16 @@ public class Game extends Canvas implements KeyListener, Runnable
     obstacles = new ObstacleSet();
     bullets = new ObstacleSet();
 
+    lastBalloon = 0;
+    lastObstacle = 0;
+    lastBullet = 0;
+
     this.addKeyListener(this);
     new Thread(this).start();
 
     setVisible(true); 
   
-    Character charter = new Character();
+    Character charter = new Character(charChoice, 20, 20, 20, 20,3);
 
   }
 
@@ -105,8 +109,12 @@ public class Game extends Canvas implements KeyListener, Runnable
       lastObstacle = System.currentTimeMillis();
     }
 
+    // if (System.currentTimeMillis() - lastBalloon > Math,random()*300+100) {
+    //   balloons.add(new Balloon());
+    //   lastBalloon = System.currentTimeMillis();
+    // }
+
     //things that need to be added:
-    //add balloon after some amount of seconds (use lastBalloon and System.currentTimeMillis())
     //adding bullets after some amount of seconds (use lastBullet and System.currentTimeMillis())
     // getting hit and losing a life
     // getting hit and losing the game
