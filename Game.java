@@ -109,13 +109,12 @@ public class Game extends Canvas implements KeyListener, Runnable
       lastObstacle = System.currentTimeMillis();
     }
 
-    // if (System.currentTimeMillis() - lastBalloon > Math,random()*300+100) {
-    //   balloons.add(new Balloon());
-    //   lastBalloon = System.currentTimeMillis();
-    // }
+    if(System.currentTimeMillis() - lastBullet > Math.random()*300+100) {
+      obstacles.add(new Obstacle("bullet", 100, 100, 10, 10, 5));
+      lastObstacle = System.currentTimeMillis();
+    }
 
     //things that need to be added:
-    //adding bullets after some amount of seconds (use lastBullet and System.currentTimeMillis())
     // getting hit and losing a life
     // getting hit and losing the game
 
