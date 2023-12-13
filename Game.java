@@ -20,8 +20,8 @@ public class Game extends Canvas implements KeyListener, Runnable
   
   // private Character char;
   private BalloonSet balloons;
-  private List<Obstacle> obstacles;
-  private List<Obstacle> bullets;
+  private ObstacleSet obstacles;
+  private ObstacleSet bullets;
 
   // pause/end game
   private boolean pause = false;
@@ -46,8 +46,8 @@ public class Game extends Canvas implements KeyListener, Runnable
 
     // char = new Character(charChoice, x, y, w, h);
     balloons = new BalloonSet();
-    obstacles = new ArrayList<Obstacle>();
-    bullets = new ArrayList<Obstacle>();
+    obstacles = new ObstacleSet();
+    bullets = new ObstacleSet();
 
     this.addKeyListener(this);
     new Thread(this).start();
@@ -89,12 +89,8 @@ public class Game extends Canvas implements KeyListener, Runnable
 
     // char.draw(graphToBack);
     balloons.update();
-    for (Obstacle o : obstacles) {
-      o.draw();
-    }
-    for (Obstacle o : bullets) {
-      o.draw();
-    }
+    obstacles.draw(graphToBack);
+    bullets.draw(graphToBack);
     graphToBack.drawString("score : " + score, 25, 25);
     graphToBack.drawString("lives : " + lives, 25, 50);
 
