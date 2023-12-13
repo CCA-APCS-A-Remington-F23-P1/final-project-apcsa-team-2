@@ -1,24 +1,28 @@
-import java.io.File;
+// import java.io.File;
 import java.net.URL;
-import java.awt.Color;
+
+import javax.imageio.ImageIO;
+
+// import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.imageio.ImageIO;
-import java.util.List;
+// import java.util.List;
 
 public class Obstacle extends MovingThing {
   private int speed;
   private Image image;
 
   public Obstacle() {
-    // generate random obstacle
-    int rand = (int) Math.random()*3;
-    if (rand==0) {
-    }
-    if (rand==1) {
-    }
-    if (rand==2) {
-    }
+    super(10,10,10,10);
+    speed=5;
+      try {
+		  URL url = getClass().getResource("/images/chair.png");
+      image = ImageIO.read(url);
+	  }
+	  catch(Exception e) {
+		  //empty
+	  }
   }
 
   // o => obstacle type.. (spike, etc.)
@@ -31,6 +35,7 @@ public class Obstacle extends MovingThing {
 	  //image
 	  try {
 		  URL url = getClass().getResource(o+".png");
+      image = ImageIO.read(url);
 	  }
 	  catch(Exception e) {
 		  //empty
@@ -43,6 +48,10 @@ public class Obstacle extends MovingThing {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public void move(String s) {
+        setX(getX()-speed);
     }
 
     public void move() {

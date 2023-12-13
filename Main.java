@@ -13,7 +13,8 @@ public class Main{
 
       System.out.println("loading the game..");
 
-      Game run = new Game(charChoice);
+      String charChoiceString = charChoice + "";
+      Game run = new Game(charChoiceString);
     }
 
 }
