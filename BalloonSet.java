@@ -67,7 +67,7 @@ public class BalloonSet {
         }
     }
 
-    public void update() {
+    public void update(Character c) {
         move();
         cleanUp();
 
@@ -76,5 +76,11 @@ public class BalloonSet {
         if (randInt <= 30) feelingLikeIt = true;
 
         if (balloons.size() <= 7 && feelingLikeIt) newSet((int) (Math.random() * 5) + 1);
+        for (int i = 0; i < balloons.size(); i++) {
+            if (balloons.get(i).taken(c)) {
+                balloons.remove(i);
+                i--;
+            }
+        }            
     }
 }

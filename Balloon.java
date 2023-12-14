@@ -62,4 +62,23 @@ public class Balloon extends MovingThing {
         else if (dir.equals("LEFT")) setX(getX() - speed);
     }
 
+    public boolean taken(Character c) {
+        int bx = this.getX();
+        int by = this.getY();
+        int cx = c.getX();
+        int cy = c.getY();
+
+        int bw = this.getWidth();
+        int bh = this.getHeight();
+        int cw = c.getWidth();
+        int ch = c.getHeight();
+
+        if (bx <= cx + cw && bx >= cx) {
+            if (by <= cy + ch && by + bh >= cy) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
