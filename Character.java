@@ -6,12 +6,17 @@ import java.awt.Image;
 import javax.imageio.ImageIO;
 import java.util.List;
 
-public class Character 
+public class Character extends MovingThing 
 {
   private Image image;
+  private int ySpeed;
+  private int y;
+
 
   public Character(String o, int x, int y, int w, int h, int s) { 
     super(x,y,w,h);
+    ySpeed = s;
+    this.y = y;
     try {
       URL url = getClass().getResource(o+".png");
     }
@@ -34,6 +39,17 @@ public class Character
       y = 500 - getHeight();
       ySpeed = 0; // Character is on the ground, so reset the vertical speed
     }
+  }
+  public void move(String direction){
+
+  }
+
+  public int getSpeed(){
+    return ySpeed;
+  }
+
+  public void setSpeed(int s){
+    ySpeed = s;
   }
 
 

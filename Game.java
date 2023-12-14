@@ -20,13 +20,9 @@ public class Game extends Canvas implements KeyListener, Runnable
   
   private Character charter;
   private BalloonSet balloons;
-  private ObstacleSet obstacles;
-  private ObstacleSet bullets;
-  private BufferedImage backg;
+  private List<Obstacle> obstacles;
+  private List<Obstacle> bullets;
 
-  private String bgLocation = "/images/Parallax_No_Car.gif";
-  private File bg;
-  
   // pause/end game
   private boolean pause = false;
   private boolean end = false;
